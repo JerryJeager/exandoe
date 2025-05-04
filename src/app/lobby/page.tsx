@@ -55,6 +55,7 @@ export default function LobbyPage() {
 
   // Handle challenge
   const handleChallenge = (username: string) => {
+    console.log(username)
     // const user = onlineUsers.find((user) => user.id === userId);
     // alert(`Challenging ${user?.username}...`);
   };
