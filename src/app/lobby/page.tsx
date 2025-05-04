@@ -43,19 +43,19 @@ export default function LobbyPage() {
       setSocket(ws);
 
       if (socket && socket.readyState === WebSocket.OPEN) {
-    //   socket.send(
-    //     JSON.stringify({
-    //       receiver_id: selectedUser.id,
-    //       content: newMessage,
-    //     })
-    //   );
-    }
+        //   socket.send(
+        //     JSON.stringify({
+        //       receiver_id: selectedUser.id,
+        //       content: newMessage,
+        //     })
+        //   );
+      }
     }
   };
 
   // Handle challenge
   const handleChallenge = (username: string) => {
-    console.log(username)
+    console.log(username);
     // const user = onlineUsers.find((user) => user.id === userId);
     // alert(`Challenging ${user?.username}...`);
   };
@@ -114,7 +114,9 @@ export default function LobbyPage() {
                     </div>
                     <button
                       onClick={() => handleChallenge(user)}
-                      className="px-4 py-1.5 bg-gray-100 text-gray-800 text-sm rounded-md hover:bg-gray-200 transition-colors"
+                      className={`px-4 py-1.5 bg-gray-100 text-gray-800 text-sm rounded-md hover:bg-gray-200 transition-colors ${
+                        user == username ? "hidden" : "block"
+                      }`}
                     >
                       Challenge
                     </button>
