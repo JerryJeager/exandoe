@@ -19,7 +19,7 @@ export default function Home() {
               strategy. No downloads, just play.
             </p>
             <Link href={"/lobby"}>
-              <button className="py-2 px-4 lg:text-3xl rounded-md bg-primary text-white font-bold mt-2">
+              <button className="py-2 px-4 lg:text-3xl rounded-md bg-primary1 text-white font-bold mt-2">
                 Play Now
               </button>
             </Link>

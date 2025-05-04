@@ -22,9 +22,9 @@ const Header = () => {
             className="rounded-md"
           />
           <h1 className="text-white font-black text-3xl">
-            e<span className="text-primary">X</span>
+            e<span className="text-primary1">X</span>
             and
-            <span className="text-primary">O</span>e
+            <span className="text-primary1">O</span>e
           </h1>
         </Link>
       </div>
