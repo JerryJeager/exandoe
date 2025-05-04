@@ -1,7 +1,15 @@
 import Link from "next/link";
 import logo from "../../../public/images/logo.jpg";
 import Image from "next/image";
-import { julee } from "@/app/page";
+import { Julee } from "next/font/google";
+
+
+
+export const julee = Julee({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+});
 
 const Header = () => {
   return (

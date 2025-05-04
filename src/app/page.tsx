@@ -1,15 +1,9 @@
 import Image from "next/image";
-import { Julee } from "next/font/google";
 
 import humans from "../../public/images/hero.png";
 import Link from "next/link";
-import Header from "@/components/layout/Header";
+import Header, { julee } from "@/components/layout/Header";
 
-export const julee = Julee({
-  subsets: ["latin"],
-  display: "swap",
-  weight: "400",
-});
 
 export default function Home() {
   return (
