@@ -41,6 +41,15 @@ export default function LobbyPage() {
         console.log("Code:", event.code, "Reason:", event.reason);
       };
       setSocket(ws);
+
+      if (socket && socket.readyState === WebSocket.OPEN) {
+    //   socket.send(
+    //     JSON.stringify({
+    //       receiver_id: selectedUser.id,
+    //       content: newMessage,
+    //     })
+    //   );
+    }
     }
   };
 
