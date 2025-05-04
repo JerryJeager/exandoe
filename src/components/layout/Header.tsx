@@ -1,10 +1,13 @@
 import Link from "next/link";
 import logo from "../../../public/images/logo.jpg";
 import Image from "next/image";
+import { julee } from "@/app/page";
 
 const Header = () => {
   return (
-    <header className="flex w-full justify-between items-center  bg-dark1 px-[10%] lg:px-[20%] py-6 border-b border-b-[#282828] shadow-lg">
+    <header
+      className={`flex w-full justify-between items-center  bg-dark1 px-[10%] lg:px-[20%] py-6 border-b border-b-[#282828] shadow-lg ${julee.className}`}
+    >
       <div>
         <Link href={"/"} className=" flex gap-2 items-center">
           <Image
