@@ -1,9 +1,7 @@
 import Link from "next/link";
-import logo from "../../../public/images/logo.jpg";
+import logo from "../../../public/images/logo.svg";
 import Image from "next/image";
 import { Julee } from "next/font/google";
-
-
 
 export const julee = Julee({
   subsets: ["latin"],
@@ -21,7 +19,6 @@ const Header = () => {
           <Image
             src={logo}
             alt="logo"
-            placeholder="blur"
             className="rounded-md"
           />
           <h1 className="text-white font-black text-3xl">
