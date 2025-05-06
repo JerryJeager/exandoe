@@ -11,6 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
 
 export default function LobbyPage() {
   const [username, setUsername] = useState("");
@@ -18,6 +19,7 @@ export default function LobbyPage() {
   const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [challenger, setChallenger] = useState("");
+  const router = useRouter();
 
   // Simulate connecting to the game
   const handleConnect = () => {
@@ -37,6 +39,12 @@ export default function LobbyPage() {
           setOnlineUsers(data?.users);
         } else if (data?.type == "challenge_request") {
           setChallenger(data?.from);
+        } else if (data?.type == "start_game") {
+          router.push(
+            `/game/${data?.room_id}?user=${username}&piece=${
+              data?.piece?.o == username ? "o" : "x"
+            }`
+          );
         }
       };
 
@@ -75,6 +83,19 @@ export default function LobbyPage() {
     }
   };
 
+  const acceptChallenge = () => {
+    const data = {
+      type: "challenge_response",
+      from: challenger,
+      to: username,
+      accepted: true,
+    };
+
+    if (socket && socket.readyState === WebSocket.OPEN) {
+      socket?.send(JSON.stringify(data));
+    }
+  };
+
   return (
     <div className="bg-dark1">
       <Header />
@@ -84,7 +105,9 @@ export default function LobbyPage() {
 
           {!isConnected ? (
             <div className="bg-dark2  border-slate-300 rounded-lg shadow-sm p-6 mb-8">
-              <h2 className="text-xl text-white font-semibold mb-4">Join the Game</h2>
+              <h2 className="text-xl text-white font-semibold mb-4">
+                Join the Game
+              </h2>
               <div className="flex flex-col sm:flex-row gap-3">
                 <input
                   type="text"
@@ -114,7 +137,9 @@ export default function LobbyPage() {
           )}
 
           <div className="bg-dark2 rounded-lg shadow-sm p-6">
-            <h2 className="text-xl text-white font-semibold mb-4">Online Players</h2>
+            <h2 className="text-xl text-white font-semibold mb-4">
+              Online Players
+            </h2>
 
             {isConnected ? (
               <div className="divide-y text-white">
@@ -151,10 +176,15 @@ export default function LobbyPage() {
         <Dialog open={challenger != ""}>
           <DialogContent>
             <div>
-              <div className="fixed text-white inset-0 bg-black/50" aria-hidden="true" />
+              <div
+                className="fixed text-white inset-0 bg-black/50"
+                aria-hidden="true"
+              />
               <div className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%]">
                 <div className="bg-dark2 p-6 rounded-lg shadow-lg text-white">
-                  <h2 className="text-xl text-white font-semibold mb-4">Game Challenge</h2>
+                  <h2 className="text-xl text-white font-semibold mb-4">
+                    Game Challenge
+                  </h2>
                   <p className="mb-6">
                     {challenger} has challenged you to a game!
                   </p>
@@ -165,7 +195,10 @@ export default function LobbyPage() {
                     >
                       Decline
                     </button>
-                    <button className="px-4 py-2 text-sm rounded-md bg-primary1 text-white hover:bg-primary1/90">
+                    <button
+                      onClick={() => acceptChallenge()}
+                      className="px-4 py-2 text-sm rounded-md bg-primary1 text-white hover:bg-primary1/90"
+                    >
                       Accept
                     </button>
                   </div>
